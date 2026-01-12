@@ -27,19 +27,21 @@ SAPPHIRE_TESTNET_RPC=https://testnet.sapphire.oasis.io
 
 # Hyperlane Mailbox Addresses
 MANTLE_MAILBOX=0x598facE78a4302f11E3de0bee1894Da0b2Cb71F8
-SAPPHIRE_MAILBOX=0x... # Get from Hyperlane docs
+SAPPHIRE_MAILBOX=0x79d3ECb26619B968A68CE9337DfE016aeA471435 # Get from Hyperlane docs
 
 # ISM (Interchain Security Module) - deploy this first
 ISM_ADDRESS=0x... # After deploying TrustedRelayerIsm
+INGRESS_ADDRESS=0x... # After deploying PrivateTransfeIngress
+VAULT_ADDRESS=0x... # After deploying PrivateTransferVault
 ```
 
 ## Deployment Order
 
-Deploy contracts in this order:
+Deploy and enroll contracts in this order:
 
-1. **TrustedRelayerIsm** (on Mantle Sepolia)
-2. **PrivateTransferIngress** (on Mantle Sepolia)
-3. **PrivateTransferVault** (on Oasis Sapphire Testnet)
+1. **TrustedRelayerIsm** (on Mantle Sepolia) - Deploy only
+2. **PrivateTransferIngress** (on Mantle Sepolia) - Deploy + Enroll with Hyperlane
+3. **PrivateTransferVault** (on Oasis Sapphire Testnet) - Deploy + Enroll with Hyperlane
 
 ## Step-by-Step Deployment
 
@@ -58,9 +60,11 @@ TrustedRelayerIsm deployed at 0x...
 
 **Save this address** - you'll need it for the next step.
 
-### 2. Deploy PrivateTransferIngress (Mantle Sepolia)
+### 2. Deploy & Enroll PrivateTransferIngress (Mantle Sepolia)
 
-Deploy the main ingress contract that handles deposits and escrow.
+Deploy the main ingress contract that handles deposits and escrow, then enroll it with Hyperlane.
+
+**Step 2a: Deploy Ingress**
 
 ```bash
 # Set the mailbox address (or use default)
@@ -76,9 +80,9 @@ PrivateTransferIngress deployed at 0x...
 
 **Save this address** for frontend configuration.
 
-### 3. Enroll Ingress with Hyperlane
+**Step 2b: Enroll Ingress with Hyperlane**
 
-After deploying Ingress, you need to enroll it with Hyperlane:
+Immediately after deployment, enroll the Ingress with Hyperlane to enable cross-chain messaging:
 
 ```bash
 npx hardhat run scripts/enroll/enrollIngress.ts --network mantleSepolia
@@ -87,10 +91,15 @@ npx hardhat run scripts/enroll/enrollIngress.ts --network mantleSepolia
 This will:
 - Set the ISM for the Ingress router
 - Configure the destination domain (Sapphire Testnet = 23295)
+- Enable cross-chain message routing
 
-### 4. Deploy PrivateTransferVault (Oasis Sapphire Testnet)
+**✅ Ingress is now fully deployed and configured.**
 
-Deploy the vault contract on Sapphire that handles confidential decryption.
+### 3. Deploy & Enroll PrivateTransferVault (Oasis Sapphire Testnet)
+
+Deploy the vault contract on Sapphire that handles confidential decryption, then enroll it with Hyperlane.
+
+**Step 3a: Deploy Vault**
 
 ```bash
 # Set the Sapphire mailbox address
@@ -107,22 +116,29 @@ Public Key: 0x...
 
 **Save both the address and public key** - you'll need the public key for frontend encryption.
 
-### 5. Enroll Vault with Hyperlane
+**Step 3b: Enroll Vault with Hyperlane**
 
-Enroll the Vault with Hyperlane to enable cross-chain messaging:
+Immediately after deployment, enroll the Vault with Hyperlane to enable cross-chain messaging:
 
 ```bash
 npx hardhat run scripts/enroll/enrollVault.ts --network sapphireTestnet
 ```
 
-### 6. Configure Frontend
+This will:
+- Configure the Vault as a router on Sapphire
+- Set up routing to Mantle Sepolia (domain 5003)
+- Enable bidirectional cross-chain communication
+
+**✅ Vault is now fully deployed and configured.**
+
+### 4. Configure Frontend
 
 Update your frontend `.env.local` with the deployed addresses:
 
 ```env
-NEXT_PUBLIC_INGRESS_ADDRESS=0x... # From step 2
-NEXT_PUBLIC_VAULT_ADDRESS=0x... # From step 4
-NEXT_PUBLIC_VAULT_PUBLIC_KEY=0x... # From step 4
+NEXT_PUBLIC_INGRESS_ADDRESS=0x... # From step 2a
+NEXT_PUBLIC_VAULT_ADDRESS=0x... # From step 3a
+NEXT_PUBLIC_VAULT_PUBLIC_KEY=0x... # From step 3a
 NEXT_PUBLIC_ROUTER_ADDRESS=0x... # Same as INGRESS_ADDRESS
 NEXT_PUBLIC_ISM_ADDRESS=0x... # From step 1
 ```

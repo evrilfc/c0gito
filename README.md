@@ -27,6 +27,8 @@ c0gito solves this by:
 - 🌉 **Cross-chain architecture** using Hyperlane to bridge between Mantle (public) and Sapphire (confidential)
 - 📊 **Real-time indexing** with Ponder for transparent tracking without exposing private data
 
+> 🚀 **Ready to get started?** [Jump to Getting Started →](#-getting-started)
+
 ---
 
 ## 🏗️ Architecture
@@ -215,10 +217,10 @@ cd c0gito
 npm install
 
 # Indexer dependencies
-cd c0gito-indexer && npm install && npm run dev
+cd c0gito-indexer && npm install
 
 # Service dependencies
-cd c0gito-service && npm install && npm run dev
+cd c0gito-service && npm install
 ```
 
 3. **Set up environment variables**
@@ -263,6 +265,7 @@ VAULT_ADDRESS=0x418A949474971a1947d932f856FB3eAA695BDdE5
 ```env
 PONDER_API_URL=http://localhost:42069/graphql
 SAPPHIRE_RPC_URL=https://testnet.sapphire.oasis.io
+OWNER_PRIVATE_KEY=<Your PK deployer contract>
 VAULT_ADDRESS=0x418A949474971a1947d932f856FB3eAA695BDdE5
 OWNER_PRIVATE_KEY=0x...
 POLL_INTERVAL=10000
@@ -442,34 +445,13 @@ c0gito/
 
 ---
 
-## 🔒 Security & Compliance
+## 🔒 Security
 
 ### Security Measures
 - ✅ Smart contract audits (planned)
 - ✅ Encrypted payload storage
 - ✅ Confidential execution environment
 - ✅ Access control mechanisms
-
-### Compliance Declaration
-
-**⚖️ COMPLIANCE DECLARATION**
-
-**This project does NOT involve regulated assets.**
-
-c0gito is a privacy-preserving transfer protocol that:
-- ✅ **Does NOT handle securities** or regulated financial instruments
-- ✅ **Does NOT require KYC/AML** for basic transfers
-- ✅ **Operates as a technical infrastructure layer** for private transfers
-- ✅ **Complies with applicable blockchain regulations**
-- ✅ **No illegal activity** - privacy for legitimate use cases only
-
-**Regulatory Status:**
-- c0gito is a protocol for private cryptocurrency transfers
-- It does not issue tokens, securities, or financial instruments
-- It does not provide custodial services
-- Users maintain full control of their funds
-- The protocol is designed to be regulatory-friendly while preserving user privacy
-
 ---
 
 ## 👥 Team
@@ -488,8 +470,8 @@ I am a full-stack blockchain developer specializing in:
 ### Contact Information
 
 - **Name**: Evril Fadrekha Cahyani
-- **Email**: [your-email@example.com] (Update with your email)
-- **GitHub**: [YourGitHub] (Update with your GitHub)
+- **Email**: magacalarth@gmail.com
+- **GitHub**: [evrilfc](https://github.com/evrilfc)
 
 ---
 
@@ -503,8 +485,8 @@ Copyright c0gito team.
 
 ### Demo & Documentation
 
-- **Live Demo**: [Your Demo URL - Add when ready]
-- **Video Demo**: [Your Video URL - 3-5 minutes walkthrough]
+- **Live Demo**: [c0gito](https://c0gito.xyz)
+- **Video Demo**: [Video](https://youtube.com)
 - **Documentation**: This README + [`scripts/deploy/README.md`](scripts/deploy/README.md)
 
 ## 📦 Deployed Contracts
