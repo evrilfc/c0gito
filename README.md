@@ -171,7 +171,7 @@ If you want to quickly test the application without deploying contracts:
 
 1. **Clone and install**
 ```bash
-git clone https://github.com/yourusername/c0gito.git
+git clone https://github.com/evrilfc/c0gito.git
 cd c0gito
 npm install
 ```
@@ -207,7 +207,7 @@ cd c0gito-service && npm install && npm run dev
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/c0gito.git
+git clone https://github.com/evrilfc/c0gito.git
 cd c0gito
 ```
 
