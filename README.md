@@ -486,7 +486,7 @@ Copyright c0gito team.
 ### Demo & Documentation
 
 - **Live Demo**: [c0gito](https://c0gito.xyz)
-- **Video Demo**: [Video](https://youtube.com)
+- **One-Pager Pitch**: [`ONE_PAGER_PITCH.md`](ONE_PAGER_PITCH.md) - Problem, solution, business model, roadmap
 - **Documentation**: This README + [`scripts/deploy/README.md`](scripts/deploy/README.md)
 
 ## 📦 Deployed Contracts
